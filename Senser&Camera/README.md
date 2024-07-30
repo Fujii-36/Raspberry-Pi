@@ -5,9 +5,6 @@
 
 ## オペレーションフロー
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/13f2bdc0-4d90-45fb-973b-03a4e31f59a4" width="200">
-  <img src="https://github.com/user-attachments/assets/1877f090-a29d-40ed-a5fe-31ba123ca7bc" width="200">
+  <img src="https://github.com/user-attachments/assets/474fb21f-41ec-4e9d-9a65-1be45d32964c" width="300">
+  <img src="https://github.com/user-attachments/assets/6d46cf31-968b-457f-bdea-b3225ac0e485" width="200">
 </p>
-
-
-
