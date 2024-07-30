@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>防犯センサー＆カメラ</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<link rel="stylesheet" href="style.css" media="screen">
+<script type="text/javascript" src="/webiopi.js"></script>
+<script type="text/javascript">
+
+webiopi().ready(function() {  
+  var port_LED = 24; //GPIO24
+  var val_LED = 0; //initial value of GPIO24
+  webiopi().setFunction(port_LED,"OUT",function(){
+     webiopi().digitalWrite(port_LED,val_LED);
+  });
+  var no = 0;
+  //taking a picture when the button is clicked
+  $('#btn1').click( function() {
+    $('#btn1').css('background','#f88888');  // change of the button color
+    // assignment of file number
+    var hour = new Date().getHours();
+    no = no + 1;
+    if(6 >= hour || hour >= 18){
+      //on LED
+      val_LED = 1;
+      webiopi().digitalWrite(port_LED,val_LED);
+    }
+    
+    setTimeout(function(){
+      // off LED
+      val_LED = 0;
+      webiopi().digitalWrite(port_LED,val_LED); 
+      // reload web
+      location.reload();
+    }, 1000);
+    for(var i = 1; i < 4; i++){
+      // calling pyhon function
+      webiopi().callMacro( 'camera', i, function(){
+        // showing the picture
+        var filename = 'camera_' + i +'.jpg';
+        $('#picture').attr({'src':filename});    // reading of the picture
+        //$('#btn1').css('background','#f8f8f8');  // change of the button color
+      });
+    }
+    webiopi().callMacro('CurrentTime',[],function(name,empty,macro){
+      $('#time').val(macro);
+    });              
+  });
+});
+
+
+</script>
+</head>
+
+<body>
+<div class="horizontal-line"></div>  
+<header>
+  <div class="header">
+    防犯センサー＆カメラ
+  </div>
+</header>
+<div class="horizontal-line"></div>
+
+<center><h1>ボタンを押したら、写真が3枚撮影されます。</h1></center>
+<center><h1>（夜の場合、LEDライトを点灯します）</h1></center>
+
+<div class="horizontal-line"></div>
+
+<nav>
+  <div class="nav-zero">
+    <ul>
+      <li id="btn1" class="ledoff"><br />Taking<br/ ><br/ ></li>
+    </ul>
+  </div>
+  <div class="clear"></div>
+</nav>
+
+<div class="horizontal-line"></div>
+
+<center><h1>撮影した3枚の写真を表示します</h1></center>
+
+<div class="horizontal-line"></div>
+
+<div class="loop">
+  <div class="loop_wrap">
+      <ul class="loop_list loop_list-left">
+          <li class="loop_item"><img src="./camera_1.jpg" alt><span class="image-name">1枚目</span></li>
+          <li class="loop_item"><img src="./camera_2.jpg" alt><span class="image-name">2枚目</span></li>
+          <li class="loop_item"><img src="./camera_3.jpg" alt><span class="image-name">3枚目</span></li>
+       </ul>
+       <ul class="loop_list loop_list-left">
+          <li class="loop_item"><img src="./camera_1.jpg" alt><span class="image-name">1枚目</span></li>
+          <li class="loop_item"><img src="./camera_2.jpg" alt><span class="image-name">2枚目</span></li>
+          <li class="loop_item"><img src="./camera_3.jpg" alt><span class="image-name">3枚目</span></li>
+       </ul>
+  </div>
+</div>
+
+<div class="horizontal-line"></div>
+
+</body>
+</html>
