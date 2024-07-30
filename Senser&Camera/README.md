@@ -1,5 +1,8 @@
 # Raspberry-Piを使用した防犯センサー
 
+## 使用技術
+- **プログラム言語**: Python, HTML, CSS
+
 ## アーキテクチャ
 ![image](https://github.com/user-attachments/assets/670233fb-5753-466c-ac8c-d15b98273a3b)
 
